@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,8 +9,12 @@ import 'package:search_image/data/remote/api/repository/api_repository_impl.dart
 import 'package:search_image/presentation/constants/RouteName.dart';
 import 'package:search_image/presentation/ui/home/home.dart';
 import 'package:search_image/presentation/utils/color_schemes.g.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+
 
 Future<void> main() async {
+  await dotenv.load(fileName: ".env");//환경 변수 로드
 
   //DI 등록
   GetIt getIt = GetIt.instance;
@@ -23,11 +29,12 @@ Future<void> main() async {
         requestBody: true,
         responseHeader: true));
 
-    /*
+
       dio.options.headers = {
-        'x-client-access': '',
+        'Authorization': '${dotenv.env['KAKAO_REST_API_KEY']}',
       };
-    */
+
+    log('#### ${dotenv.env['KAKAO_REST_API_KEY']}');
 
     getIt.registerSingleton<Dio>(dio);
 
