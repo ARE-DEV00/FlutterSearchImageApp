@@ -25,7 +25,7 @@ class ImageViewScreen extends ConsumerWidget {
                   : const Icon(Icons.image_not_supported, color: Colors.white),
             ),
             Positioned(
-              top: 20,
+              top: 50,
               left: 5,
               child: IconButton(
                 icon: const Icon(Icons.arrow_back, color: Colors.white),

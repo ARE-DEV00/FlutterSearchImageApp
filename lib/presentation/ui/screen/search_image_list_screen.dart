@@ -100,15 +100,23 @@ class SearchImageListScreen extends ConsumerWidget {
                       itemCount: searchResults.length,
                       itemBuilder: (context, index) {
                         final imageUrl = searchResults[index].imageUrl ?? '';
+                        final isFavorite = searchResults[index].isFavorite;
                         return GridTile(
                             header: Container(
                               alignment: Alignment.topRight,
                               padding: const EdgeInsets.all(1.0),
                               child: IconButton(
-                                icon: const Icon(Icons.favorite_outline,
+                                icon: isFavorite? const Icon(Icons.favorite,
+                                    color: Colors.red):const Icon(Icons.favorite_outline,
                                     color: Colors.white),
-                                onPressed: () {},
-                              ),
+                                onPressed: () async {
+                                  if(!isFavorite){
+                                    ref.read(searchViewModelProvider.notifier).addFavoriteImage(searchResults[index]);
+                                  }else{
+                                    ref.read(searchViewModelProvider.notifier).removeFavoriteImage(searchResults[index]);
+                                  }
+                                },
+                              )
                             ),
                             footer: Container(
                               padding: const EdgeInsets.all(8.0),

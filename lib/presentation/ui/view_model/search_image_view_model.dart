@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:search_image/domain/entity/image_info_entitiy.dart';
 import 'package:search_image/domain/entity/search_image_list_meta_entity.dart';
+import 'package:search_image/domain/usecase/favorite_image_use_case.dart';
 import 'package:search_image/domain/usecase/search_image_use_case.dart';
 import 'package:search_image/presentation/ui/state/search_image_state.dart';
 
@@ -10,6 +11,8 @@ class SearchImageViewModel extends StateNotifier<SearchImageState> {
   SearchImageViewModel() : super(SearchImageState());
 
   final _searchImageUseCase = SearchImageUseCase();
+  final _favoriteImageUseCase = FavoriteImageUseCase();
+
   List<ImageInfoEntity> _searchImageEntityList = [];
   SearchImageResultMetaEntity? _searchResultMeta;
   int _page = 1;
@@ -24,7 +27,8 @@ class SearchImageViewModel extends StateNotifier<SearchImageState> {
     }
 
     _query = query;
-    final searchImageListEntity = await _searchImageUseCase.getSearchImageList(query, _page++);
+    final searchImageListEntity =
+        await _searchImageUseCase.getSearchImageList(query, _page++);
     _searchResultMeta = searchImageListEntity.searchImageResultMetaEntity;
     _searchImageEntityList = searchImageListEntity.imageInfoEntityList;
     state = SearchImageState(imageInfoEntityList: _searchImageEntityList);
@@ -34,7 +38,7 @@ class SearchImageViewModel extends StateNotifier<SearchImageState> {
     log('#### _page:$_page');
 
     // 검색결과가 더이상 없을 경우
-    if(_searchResultMeta?.isEnd == true) {
+    if (_searchResultMeta?.isEnd == true) {
       return;
     }
 
@@ -44,9 +48,31 @@ class SearchImageViewModel extends StateNotifier<SearchImageState> {
       return;
     }
 
-    final searchImageListEntity = await _searchImageUseCase.getSearchImageList(_query, _page++);
+    final searchImageListEntity =
+        await _searchImageUseCase.getSearchImageList(_query, _page++);
     _searchResultMeta = searchImageListEntity.searchImageResultMetaEntity;
     _searchImageEntityList += searchImageListEntity.imageInfoEntityList;
+    state = SearchImageState(imageInfoEntityList: _searchImageEntityList);
+  }
+
+  Future<void> addFavoriteImage(ImageInfoEntity imageInfoEntity) async {
+    log('#### addFavoriteImage');
+    await _favoriteImageUseCase.addFavoriteImage(imageInfoEntity);
+    for (var element in _searchImageEntityList) {
+      if (element.uniqueId == imageInfoEntity.uniqueId) {
+        element.isFavorite = true;
+      }
+    }
+    state = SearchImageState(imageInfoEntityList: _searchImageEntityList);
+  }
+
+  Future<void> removeFavoriteImage(ImageInfoEntity imageInfoEntity) async {
+    await _favoriteImageUseCase.removeFavoriteImage(imageInfoEntity);
+    for (var element in _searchImageEntityList) {
+      if (element.uniqueId == imageInfoEntity.uniqueId) {
+        element.isFavorite = false;
+      }
+    }
     state = SearchImageState(imageInfoEntityList: _searchImageEntityList);
   }
 
