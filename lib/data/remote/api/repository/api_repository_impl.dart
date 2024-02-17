@@ -25,7 +25,7 @@ class ApiRepositoryImpl implements ApiRepository {
         } else {
           return response.documents.map((value) {
             log("[KSH] Result: ${value.displaySitename}: ${value.imageUrl}");
-            return SearchImageEntity(value.displaySitename, value.imageUrl);
+            return SearchImageEntity(displaySitename: value.displaySitename, imageUrl: value.imageUrl);
           }).toList();
         }
       } else {

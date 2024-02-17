@@ -7,7 +7,7 @@ import 'package:get_it/get_it.dart';
 import 'package:search_image/data/remote/api/api_service.dart';
 import 'package:search_image/data/remote/api/repository/api_repository_impl.dart';
 import 'package:search_image/presentation/constants/RouteName.dart';
-import 'package:search_image/presentation/ui/home/home.dart';
+import 'package:search_image/presentation/ui/screen/home/home_screen.dart';
 import 'package:search_image/presentation/utils/color_schemes.g.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -69,9 +69,9 @@ class MyApp extends ConsumerWidget {
           colorScheme: darkColorScheme,
         ),
         themeMode: ThemeMode.system,
-        initialRoute: RouteName.home,
+        initialRoute: RouteName.homeScreen,
         routes: {
-          RouteName.home: (context) => Home(),
+          RouteName.homeScreen: (context) => HomeScreen(),
         });
   }
 }

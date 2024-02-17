@@ -2,5 +2,5 @@ class SearchImageEntity {
   late String displaySitename;
   String? imageUrl;
 
-  SearchImageEntity(this.displaySitename, this.imageUrl);
+  SearchImageEntity({required this.displaySitename, this.imageUrl});
 }
