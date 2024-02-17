@@ -4,12 +4,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:search_image/presentation/constants/RouteName.dart';
-import 'package:search_image/presentation/ui/state/favorite_image_state.dart';
 import 'package:search_image/presentation/ui/view_model/favorite_image_view_model.dart';
 
-final favoriteViewModelProvider =
-StateNotifierProvider<FavoriteImageViewModel, FavoriteImageState>(
-        (ref) => FavoriteImageViewModel());
 
 class FavoriteListScreen extends ConsumerWidget {
   FavoriteListScreen({Key? key}) : super(key: key);

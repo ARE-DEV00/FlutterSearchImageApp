@@ -5,6 +5,11 @@ import 'package:search_image/domain/entity/image_info_entitiy.dart';
 import 'package:search_image/domain/usecase/favorite_image_use_case.dart';
 import 'package:search_image/presentation/ui/state/favorite_image_state.dart';
 
+final favoriteViewModelProvider =
+StateNotifierProvider<FavoriteImageViewModel, FavoriteImageState>(
+        (ref) => FavoriteImageViewModel());
+
+
 class FavoriteImageViewModel extends StateNotifier<FavoriteImageState> {
   FavoriteImageViewModel() : super(FavoriteImageState());
 
