@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
-import 'package:search_image/data/model/search_image_response.dart';
+import 'package:search_image/data/remote/model/search_image_response.dart';
 
 part 'api_service.g.dart';
 

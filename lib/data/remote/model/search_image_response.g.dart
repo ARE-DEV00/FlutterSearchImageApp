@@ -20,8 +20,7 @@ Map<String, dynamic> _$SearchResultMetaToJson(SearchResultMeta instance) =>
       'is_end': instance.isEnd,
     };
 
-ImageDocument _$ImageDocumentFromJson(Map<String, dynamic> json) =>
-    ImageDocument(
+ImageInfo _$ImageInfoFromJson(Map<String, dynamic> json) => ImageInfo(
       collection: json['collection'] as String,
       thumbnailUrl: json['thumbnail_url'] as String,
       imageUrl: json['image_url'] as String,
@@ -32,8 +31,7 @@ ImageDocument _$ImageDocumentFromJson(Map<String, dynamic> json) =>
       datetime: json['datetime'] as String,
     );
 
-Map<String, dynamic> _$ImageDocumentToJson(ImageDocument instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$ImageInfoToJson(ImageInfo instance) => <String, dynamic>{
       'collection': instance.collection,
       'thumbnail_url': instance.thumbnailUrl,
       'image_url': instance.imageUrl,
@@ -48,7 +46,7 @@ SearchImageResponse _$SearchImageResponseFromJson(Map<String, dynamic> json) =>
     SearchImageResponse(
       meta: SearchResultMeta.fromJson(json['meta'] as Map<String, dynamic>),
       documents: (json['documents'] as List<dynamic>)
-          .map((e) => ImageDocument.fromJson(e as Map<String, dynamic>))
+          .map((e) => ImageInfo.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

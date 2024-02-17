@@ -22,7 +22,7 @@ class SearchResultMeta {
 }
 
 @JsonSerializable()
-class ImageDocument {
+class ImageInfo {
   final String collection;
   @JsonKey(name: 'thumbnail_url')
   final String thumbnailUrl;
@@ -36,7 +36,7 @@ class ImageDocument {
   final String docUrl;
   final String datetime;
 
-  ImageDocument({
+  ImageInfo({
     required this.collection,
     required this.thumbnailUrl,
     required this.imageUrl,
@@ -47,14 +47,14 @@ class ImageDocument {
     required this.datetime,
   });
 
-  factory ImageDocument.fromJson(Map<String, dynamic> json) => _$ImageDocumentFromJson(json);
-  Map<String, dynamic> toJson() => _$ImageDocumentToJson(this);
+  factory ImageInfo.fromJson(Map<String, dynamic> json) => _$ImageInfoFromJson(json);
+  Map<String, dynamic> toJson() => _$ImageInfoToJson(this);
 }
 
 @JsonSerializable()
 class SearchImageResponse {
   final SearchResultMeta meta;
-  final List<ImageDocument> documents;
+  final List<ImageInfo> documents;
 
   SearchImageResponse({
     required this.meta,
