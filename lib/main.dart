@@ -7,7 +7,9 @@ import 'package:get_it/get_it.dart';
 import 'package:search_image/data/remote/api/api_service.dart';
 import 'package:search_image/data/remote/api/repository/api_repository_impl.dart';
 import 'package:search_image/presentation/constants/RouteName.dart';
-import 'package:search_image/presentation/ui/screen/home/home_screen.dart';
+import 'package:search_image/presentation/ui/screen/home_screen.dart';
+import 'package:search_image/presentation/ui/screen/image_view_screen.dart';
+import 'package:search_image/presentation/ui/screen/search_image_list_screen.dart';
 import 'package:search_image/presentation/utils/color_schemes.g.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -72,6 +74,9 @@ class MyApp extends ConsumerWidget {
         initialRoute: RouteName.homeScreen,
         routes: {
           RouteName.homeScreen: (context) => HomeScreen(),
+          RouteName.searchImageListScreen: (context) => SearchImageListScreen(),
+          RouteName.imageViewScreen: (context) => ImageViewScreen(),
+
         });
   }
 }
