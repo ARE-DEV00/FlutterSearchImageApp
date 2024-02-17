@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:get_it/get_it.dart';
 import 'package:search_image/data/remote/api/api_service.dart';
+import 'package:search_image/data/utils/common_data_util.dart';
 import 'package:search_image/domain/entity/image_info_entitiy.dart';
 import 'package:search_image/domain/entity/search_image_result_entity.dart';
 import 'package:search_image/domain/entity/search_image_list_meta_entity.dart';
@@ -27,19 +28,27 @@ class ApiRepositoryImpl implements ApiRepository {
         );
 
         if (response.documents.isEmpty) {
-          return SearchImageResultEntity(searchImageResultMetaEntity: searchImageResultMetaEntity, imageInfoEntityList: []);
+          return SearchImageResultEntity(
+              searchImageResultMetaEntity: searchImageResultMetaEntity,
+              imageInfoEntityList: []);
         } else {
-          List<ImageInfoEntity> imageInfoEntityList = response.documents.map((value) {
-             return ImageInfoEntity(
-              imageUrl: value.imageUrl,
-              collection: value.collection,
-              datetime: value.datetime,
-              docUrl: value.docUrl,
-              height: value.height,
-              thumbnailUrl: value.thumbnailUrl,
-              width: value.width,
-              displaySitename: value.displaySitename,
-            );
+          List<ImageInfoEntity> imageInfoEntityList =
+              response.documents.map((value) {
+            return ImageInfoEntity(
+                imageUrl: value.imageUrl,
+                collection: value.collection,
+                datetime: value.datetime,
+                docUrl: value.docUrl,
+                height: value.height,
+                thumbnailUrl: value.thumbnailUrl,
+                width: value.width,
+                displaySitename: value.displaySitename,
+                uniqueId: CommonDataUtil.generateUniqueId(
+                    collection: value.collection,
+                    displaySitename: value.displaySitename,
+                    imageUrl: value.imageUrl,
+                    datetime: value.datetime),
+                isFavorite: false);
           }).toList();
 
           return SearchImageResultEntity(

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'favorite_image.dart';
+part of 'favorite_image_collection.dart';
 
 // **************************************************************************
 // IsarCollectionGenerator
@@ -9,13 +9,14 @@ part of 'favorite_image.dart';
 // coverage:ignore-file
 // ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, prefer_const_constructors, lines_longer_than_80_chars, require_trailing_commas, inference_failure_on_function_invocation, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_checks, join_return_with_assignment, prefer_final_locals, avoid_js_rounded_ints, avoid_positional_boolean_parameters, always_specify_types
 
-extension GetFavoriteImageCollection on Isar {
-  IsarCollection<FavoriteImage> get favoriteImages => this.collection();
+extension GetFavoriteImageCollectionCollection on Isar {
+  IsarCollection<FavoriteImageCollection> get favoriteImageCollections =>
+      this.collection();
 }
 
-const FavoriteImageSchema = CollectionSchema(
-  name: r'FavoriteImage',
-  id: -913577394165804783,
+const FavoriteImageCollectionSchema = CollectionSchema(
+  name: r'FavoriteImageCollection',
+  id: 4513373889502184055,
   properties: {
     r'collection': PropertySchema(
       id: 0,
@@ -47,33 +48,43 @@ const FavoriteImageSchema = CollectionSchema(
       name: r'imageUrl',
       type: IsarType.string,
     ),
-    r'thumbnailUrl': PropertySchema(
+    r'isFavorite': PropertySchema(
       id: 6,
+      name: r'isFavorite',
+      type: IsarType.bool,
+    ),
+    r'thumbnailUrl': PropertySchema(
+      id: 7,
       name: r'thumbnailUrl',
       type: IsarType.string,
     ),
+    r'uniqueId': PropertySchema(
+      id: 8,
+      name: r'uniqueId',
+      type: IsarType.string,
+    ),
     r'width': PropertySchema(
-      id: 7,
+      id: 9,
       name: r'width',
       type: IsarType.long,
     )
   },
-  estimateSize: _favoriteImageEstimateSize,
-  serialize: _favoriteImageSerialize,
-  deserialize: _favoriteImageDeserialize,
-  deserializeProp: _favoriteImageDeserializeProp,
+  estimateSize: _favoriteImageCollectionEstimateSize,
+  serialize: _favoriteImageCollectionSerialize,
+  deserialize: _favoriteImageCollectionDeserialize,
+  deserializeProp: _favoriteImageCollectionDeserializeProp,
   idName: r'id',
   indexes: {},
   links: {},
   embeddedSchemas: {},
-  getId: _favoriteImageGetId,
-  getLinks: _favoriteImageGetLinks,
-  attach: _favoriteImageAttach,
+  getId: _favoriteImageCollectionGetId,
+  getLinks: _favoriteImageCollectionGetLinks,
+  attach: _favoriteImageCollectionAttach,
   version: '3.1.0+1',
 );
 
-int _favoriteImageEstimateSize(
-  FavoriteImage object,
+int _favoriteImageCollectionEstimateSize(
+  FavoriteImageCollection object,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
@@ -114,11 +125,12 @@ int _favoriteImageEstimateSize(
       bytesCount += 3 + value.length * 3;
     }
   }
+  bytesCount += 3 + object.uniqueId.length * 3;
   return bytesCount;
 }
 
-void _favoriteImageSerialize(
-  FavoriteImage object,
+void _favoriteImageCollectionSerialize(
+  FavoriteImageCollection object,
   IsarWriter writer,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
@@ -129,30 +141,35 @@ void _favoriteImageSerialize(
   writer.writeString(offsets[3], object.docUrl);
   writer.writeLong(offsets[4], object.height);
   writer.writeString(offsets[5], object.imageUrl);
-  writer.writeString(offsets[6], object.thumbnailUrl);
-  writer.writeLong(offsets[7], object.width);
+  writer.writeBool(offsets[6], object.isFavorite);
+  writer.writeString(offsets[7], object.thumbnailUrl);
+  writer.writeString(offsets[8], object.uniqueId);
+  writer.writeLong(offsets[9], object.width);
 }
 
-FavoriteImage _favoriteImageDeserialize(
+FavoriteImageCollection _favoriteImageCollectionDeserialize(
   Id id,
   IsarReader reader,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  final object = FavoriteImage();
-  object.collection = reader.readStringOrNull(offsets[0]);
-  object.datetime = reader.readStringOrNull(offsets[1]);
-  object.displaySitename = reader.readStringOrNull(offsets[2]);
-  object.docUrl = reader.readStringOrNull(offsets[3]);
-  object.height = reader.readLongOrNull(offsets[4]);
+  final object = FavoriteImageCollection(
+    collection: reader.readStringOrNull(offsets[0]),
+    datetime: reader.readStringOrNull(offsets[1]),
+    displaySitename: reader.readStringOrNull(offsets[2]),
+    docUrl: reader.readStringOrNull(offsets[3]),
+    height: reader.readLongOrNull(offsets[4]),
+    imageUrl: reader.readStringOrNull(offsets[5]),
+    isFavorite: reader.readBool(offsets[6]),
+    thumbnailUrl: reader.readStringOrNull(offsets[7]),
+    uniqueId: reader.readString(offsets[8]),
+    width: reader.readLongOrNull(offsets[9]),
+  );
   object.id = id;
-  object.imageUrl = reader.readStringOrNull(offsets[5]);
-  object.thumbnailUrl = reader.readStringOrNull(offsets[6]);
-  object.width = reader.readLongOrNull(offsets[7]);
   return object;
 }
 
-P _favoriteImageDeserializeProp<P>(
+P _favoriteImageCollectionDeserializeProp<P>(
   IsarReader reader,
   int propertyId,
   int offset,
@@ -172,40 +189,46 @@ P _favoriteImageDeserializeProp<P>(
     case 5:
       return (reader.readStringOrNull(offset)) as P;
     case 6:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readBool(offset)) as P;
     case 7:
+      return (reader.readStringOrNull(offset)) as P;
+    case 8:
+      return (reader.readString(offset)) as P;
+    case 9:
       return (reader.readLongOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
 }
 
-Id _favoriteImageGetId(FavoriteImage object) {
+Id _favoriteImageCollectionGetId(FavoriteImageCollection object) {
   return object.id;
 }
 
-List<IsarLinkBase<dynamic>> _favoriteImageGetLinks(FavoriteImage object) {
+List<IsarLinkBase<dynamic>> _favoriteImageCollectionGetLinks(
+    FavoriteImageCollection object) {
   return [];
 }
 
-void _favoriteImageAttach(
-    IsarCollection<dynamic> col, Id id, FavoriteImage object) {
+void _favoriteImageCollectionAttach(
+    IsarCollection<dynamic> col, Id id, FavoriteImageCollection object) {
   object.id = id;
 }
 
-extension FavoriteImageQueryWhereSort
-    on QueryBuilder<FavoriteImage, FavoriteImage, QWhere> {
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterWhere> anyId() {
+extension FavoriteImageCollectionQueryWhereSort
+    on QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QWhere> {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterWhere>
+      anyId() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(const IdWhereClause.any());
     });
   }
 }
 
-extension FavoriteImageQueryWhere
-    on QueryBuilder<FavoriteImage, FavoriteImage, QWhereClause> {
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterWhereClause> idEqualTo(
-      Id id) {
+extension FavoriteImageCollectionQueryWhere on QueryBuilder<
+    FavoriteImageCollection, FavoriteImageCollection, QWhereClause> {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterWhereClause> idEqualTo(Id id) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IdWhereClause.between(
         lower: id,
@@ -214,8 +237,8 @@ extension FavoriteImageQueryWhere
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterWhereClause> idNotEqualTo(
-      Id id) {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterWhereClause> idNotEqualTo(Id id) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
@@ -237,9 +260,8 @@ extension FavoriteImageQueryWhere
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterWhereClause> idGreaterThan(
-      Id id,
-      {bool include = false}) {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterWhereClause> idGreaterThan(Id id, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
         IdWhereClause.greaterThan(lower: id, includeLower: include),
@@ -247,9 +269,8 @@ extension FavoriteImageQueryWhere
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterWhereClause> idLessThan(
-      Id id,
-      {bool include = false}) {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterWhereClause> idLessThan(Id id, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
         IdWhereClause.lessThan(upper: id, includeUpper: include),
@@ -257,7 +278,8 @@ extension FavoriteImageQueryWhere
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterWhereClause> idBetween(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterWhereClause> idBetween(
     Id lowerId,
     Id upperId, {
     bool includeLower = true,
@@ -274,10 +296,10 @@ extension FavoriteImageQueryWhere
   }
 }
 
-extension FavoriteImageQueryFilter
-    on QueryBuilder<FavoriteImage, FavoriteImage, QFilterCondition> {
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      collectionIsNull() {
+extension FavoriteImageCollectionQueryFilter on QueryBuilder<
+    FavoriteImageCollection, FavoriteImageCollection, QFilterCondition> {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> collectionIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
         property: r'collection',
@@ -285,8 +307,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      collectionIsNotNull() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> collectionIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
         property: r'collection',
@@ -294,8 +316,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      collectionEqualTo(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> collectionEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -308,8 +330,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      collectionGreaterThan(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> collectionGreaterThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -324,8 +346,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      collectionLessThan(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> collectionLessThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -340,8 +362,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      collectionBetween(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> collectionBetween(
     String? lower,
     String? upper, {
     bool includeLower = true,
@@ -360,8 +382,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      collectionStartsWith(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> collectionStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -374,8 +396,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      collectionEndsWith(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> collectionEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -388,7 +410,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+          QAfterFilterCondition>
       collectionContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
@@ -399,7 +422,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+          QAfterFilterCondition>
       collectionMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
@@ -410,8 +434,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      collectionIsEmpty() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> collectionIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'collection',
@@ -420,8 +444,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      collectionIsNotEmpty() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> collectionIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'collection',
@@ -430,8 +454,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      datetimeIsNull() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> datetimeIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
         property: r'datetime',
@@ -439,8 +463,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      datetimeIsNotNull() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> datetimeIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
         property: r'datetime',
@@ -448,8 +472,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      datetimeEqualTo(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> datetimeEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -462,8 +486,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      datetimeGreaterThan(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> datetimeGreaterThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -478,8 +502,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      datetimeLessThan(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> datetimeLessThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -494,8 +518,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      datetimeBetween(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> datetimeBetween(
     String? lower,
     String? upper, {
     bool includeLower = true,
@@ -514,8 +538,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      datetimeStartsWith(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> datetimeStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -528,8 +552,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      datetimeEndsWith(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> datetimeEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -542,7 +566,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+          QAfterFilterCondition>
       datetimeContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
@@ -553,7 +578,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+          QAfterFilterCondition>
       datetimeMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
@@ -564,8 +590,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      datetimeIsEmpty() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> datetimeIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'datetime',
@@ -574,8 +600,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      datetimeIsNotEmpty() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> datetimeIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'datetime',
@@ -584,8 +610,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      displaySitenameIsNull() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> displaySitenameIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
         property: r'displaySitename',
@@ -593,8 +619,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      displaySitenameIsNotNull() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> displaySitenameIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
         property: r'displaySitename',
@@ -602,8 +628,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      displaySitenameEqualTo(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> displaySitenameEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -616,8 +642,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      displaySitenameGreaterThan(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> displaySitenameGreaterThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -632,8 +658,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      displaySitenameLessThan(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> displaySitenameLessThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -648,8 +674,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      displaySitenameBetween(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> displaySitenameBetween(
     String? lower,
     String? upper, {
     bool includeLower = true,
@@ -668,8 +694,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      displaySitenameStartsWith(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> displaySitenameStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -682,8 +708,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      displaySitenameEndsWith(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> displaySitenameEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -696,7 +722,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+          QAfterFilterCondition>
       displaySitenameContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
@@ -707,7 +734,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+          QAfterFilterCondition>
       displaySitenameMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
@@ -718,8 +746,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      displaySitenameIsEmpty() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> displaySitenameIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'displaySitename',
@@ -728,8 +756,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      displaySitenameIsNotEmpty() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> displaySitenameIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'displaySitename',
@@ -738,8 +766,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      docUrlIsNull() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> docUrlIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
         property: r'docUrl',
@@ -747,8 +775,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      docUrlIsNotNull() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> docUrlIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
         property: r'docUrl',
@@ -756,8 +784,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      docUrlEqualTo(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> docUrlEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -770,8 +798,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      docUrlGreaterThan(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> docUrlGreaterThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -786,8 +814,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      docUrlLessThan(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> docUrlLessThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -802,8 +830,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      docUrlBetween(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> docUrlBetween(
     String? lower,
     String? upper, {
     bool includeLower = true,
@@ -822,8 +850,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      docUrlStartsWith(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> docUrlStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -836,8 +864,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      docUrlEndsWith(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> docUrlEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -850,7 +878,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+          QAfterFilterCondition>
       docUrlContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
@@ -861,7 +890,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+          QAfterFilterCondition>
       docUrlMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
@@ -872,8 +902,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      docUrlIsEmpty() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> docUrlIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'docUrl',
@@ -882,8 +912,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      docUrlIsNotEmpty() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> docUrlIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'docUrl',
@@ -892,8 +922,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      heightIsNull() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> heightIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
         property: r'height',
@@ -901,8 +931,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      heightIsNotNull() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> heightIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
         property: r'height',
@@ -910,8 +940,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      heightEqualTo(int? value) {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> heightEqualTo(int? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'height',
@@ -920,8 +950,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      heightGreaterThan(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> heightGreaterThan(
     int? value, {
     bool include = false,
   }) {
@@ -934,8 +964,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      heightLessThan(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> heightLessThan(
     int? value, {
     bool include = false,
   }) {
@@ -948,8 +978,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      heightBetween(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> heightBetween(
     int? lower,
     int? upper, {
     bool includeLower = true,
@@ -966,8 +996,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition> idEqualTo(
-      Id value) {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> idEqualTo(Id value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'id',
@@ -976,8 +1006,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      idGreaterThan(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> idGreaterThan(
     Id value, {
     bool include = false,
   }) {
@@ -990,7 +1020,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition> idLessThan(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> idLessThan(
     Id value, {
     bool include = false,
   }) {
@@ -1003,7 +1034,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition> idBetween(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> idBetween(
     Id lower,
     Id upper, {
     bool includeLower = true,
@@ -1020,8 +1052,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      imageUrlIsNull() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> imageUrlIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
         property: r'imageUrl',
@@ -1029,8 +1061,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      imageUrlIsNotNull() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> imageUrlIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
         property: r'imageUrl',
@@ -1038,8 +1070,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      imageUrlEqualTo(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> imageUrlEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -1052,8 +1084,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      imageUrlGreaterThan(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> imageUrlGreaterThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1068,8 +1100,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      imageUrlLessThan(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> imageUrlLessThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1084,8 +1116,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      imageUrlBetween(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> imageUrlBetween(
     String? lower,
     String? upper, {
     bool includeLower = true,
@@ -1104,8 +1136,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      imageUrlStartsWith(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> imageUrlStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -1118,8 +1150,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      imageUrlEndsWith(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> imageUrlEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -1132,7 +1164,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+          QAfterFilterCondition>
       imageUrlContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
@@ -1143,7 +1176,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+          QAfterFilterCondition>
       imageUrlMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
@@ -1154,8 +1188,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      imageUrlIsEmpty() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> imageUrlIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'imageUrl',
@@ -1164,8 +1198,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      imageUrlIsNotEmpty() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> imageUrlIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'imageUrl',
@@ -1174,8 +1208,18 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      thumbnailUrlIsNull() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> isFavoriteEqualTo(bool value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'isFavorite',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> thumbnailUrlIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
         property: r'thumbnailUrl',
@@ -1183,8 +1227,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      thumbnailUrlIsNotNull() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> thumbnailUrlIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
         property: r'thumbnailUrl',
@@ -1192,8 +1236,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      thumbnailUrlEqualTo(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> thumbnailUrlEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -1206,8 +1250,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      thumbnailUrlGreaterThan(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> thumbnailUrlGreaterThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1222,8 +1266,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      thumbnailUrlLessThan(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> thumbnailUrlLessThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1238,8 +1282,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      thumbnailUrlBetween(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> thumbnailUrlBetween(
     String? lower,
     String? upper, {
     bool includeLower = true,
@@ -1258,8 +1302,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      thumbnailUrlStartsWith(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> thumbnailUrlStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -1272,8 +1316,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      thumbnailUrlEndsWith(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> thumbnailUrlEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -1286,7 +1330,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+          QAfterFilterCondition>
       thumbnailUrlContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
@@ -1297,7 +1342,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+          QAfterFilterCondition>
       thumbnailUrlMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
@@ -1308,8 +1354,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      thumbnailUrlIsEmpty() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> thumbnailUrlIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'thumbnailUrl',
@@ -1318,8 +1364,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      thumbnailUrlIsNotEmpty() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> thumbnailUrlIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'thumbnailUrl',
@@ -1328,8 +1374,146 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      widthIsNull() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> uniqueIdEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'uniqueId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> uniqueIdGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'uniqueId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> uniqueIdLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'uniqueId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> uniqueIdBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'uniqueId',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> uniqueIdStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'uniqueId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> uniqueIdEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'uniqueId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+          QAfterFilterCondition>
+      uniqueIdContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'uniqueId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+          QAfterFilterCondition>
+      uniqueIdMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'uniqueId',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> uniqueIdIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'uniqueId',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> uniqueIdIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'uniqueId',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> widthIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
         property: r'width',
@@ -1337,8 +1521,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      widthIsNotNull() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> widthIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
         property: r'width',
@@ -1346,8 +1530,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      widthEqualTo(int? value) {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> widthEqualTo(int? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'width',
@@ -1356,8 +1540,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      widthGreaterThan(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> widthGreaterThan(
     int? value, {
     bool include = false,
   }) {
@@ -1370,8 +1554,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      widthLessThan(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> widthLessThan(
     int? value, {
     bool include = false,
   }) {
@@ -1384,8 +1568,8 @@ extension FavoriteImageQueryFilter
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterFilterCondition>
-      widthBetween(
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> widthBetween(
     int? lower,
     int? upper, {
     bool includeLower = true,
@@ -1403,253 +1587,329 @@ extension FavoriteImageQueryFilter
   }
 }
 
-extension FavoriteImageQueryObject
-    on QueryBuilder<FavoriteImage, FavoriteImage, QFilterCondition> {}
+extension FavoriteImageCollectionQueryObject on QueryBuilder<
+    FavoriteImageCollection, FavoriteImageCollection, QFilterCondition> {}
 
-extension FavoriteImageQueryLinks
-    on QueryBuilder<FavoriteImage, FavoriteImage, QFilterCondition> {}
+extension FavoriteImageCollectionQueryLinks on QueryBuilder<
+    FavoriteImageCollection, FavoriteImageCollection, QFilterCondition> {}
 
-extension FavoriteImageQuerySortBy
-    on QueryBuilder<FavoriteImage, FavoriteImage, QSortBy> {
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterSortBy> sortByCollection() {
+extension FavoriteImageCollectionQuerySortBy
+    on QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QSortBy> {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
+      sortByCollection() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'collection', Sort.asc);
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterSortBy>
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
       sortByCollectionDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'collection', Sort.desc);
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterSortBy> sortByDatetime() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
+      sortByDatetime() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'datetime', Sort.asc);
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterSortBy>
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
       sortByDatetimeDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'datetime', Sort.desc);
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterSortBy>
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
       sortByDisplaySitename() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'displaySitename', Sort.asc);
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterSortBy>
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
       sortByDisplaySitenameDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'displaySitename', Sort.desc);
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterSortBy> sortByDocUrl() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
+      sortByDocUrl() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'docUrl', Sort.asc);
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterSortBy> sortByDocUrlDesc() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
+      sortByDocUrlDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'docUrl', Sort.desc);
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterSortBy> sortByHeight() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
+      sortByHeight() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'height', Sort.asc);
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterSortBy> sortByHeightDesc() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
+      sortByHeightDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'height', Sort.desc);
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterSortBy> sortByImageUrl() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
+      sortByImageUrl() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'imageUrl', Sort.asc);
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterSortBy>
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
       sortByImageUrlDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'imageUrl', Sort.desc);
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterSortBy>
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
+      sortByIsFavorite() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isFavorite', Sort.asc);
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
+      sortByIsFavoriteDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isFavorite', Sort.desc);
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
       sortByThumbnailUrl() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'thumbnailUrl', Sort.asc);
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterSortBy>
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
       sortByThumbnailUrlDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'thumbnailUrl', Sort.desc);
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterSortBy> sortByWidth() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
+      sortByUniqueId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'uniqueId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
+      sortByUniqueIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'uniqueId', Sort.desc);
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
+      sortByWidth() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'width', Sort.asc);
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterSortBy> sortByWidthDesc() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
+      sortByWidthDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'width', Sort.desc);
     });
   }
 }
 
-extension FavoriteImageQuerySortThenBy
-    on QueryBuilder<FavoriteImage, FavoriteImage, QSortThenBy> {
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterSortBy> thenByCollection() {
+extension FavoriteImageCollectionQuerySortThenBy on QueryBuilder<
+    FavoriteImageCollection, FavoriteImageCollection, QSortThenBy> {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
+      thenByCollection() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'collection', Sort.asc);
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterSortBy>
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
       thenByCollectionDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'collection', Sort.desc);
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterSortBy> thenByDatetime() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
+      thenByDatetime() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'datetime', Sort.asc);
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterSortBy>
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
       thenByDatetimeDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'datetime', Sort.desc);
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterSortBy>
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
       thenByDisplaySitename() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'displaySitename', Sort.asc);
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterSortBy>
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
       thenByDisplaySitenameDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'displaySitename', Sort.desc);
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterSortBy> thenByDocUrl() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
+      thenByDocUrl() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'docUrl', Sort.asc);
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterSortBy> thenByDocUrlDesc() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
+      thenByDocUrlDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'docUrl', Sort.desc);
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterSortBy> thenByHeight() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
+      thenByHeight() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'height', Sort.asc);
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterSortBy> thenByHeightDesc() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
+      thenByHeightDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'height', Sort.desc);
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterSortBy> thenById() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
+      thenById() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.asc);
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterSortBy> thenByIdDesc() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
+      thenByIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.desc);
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterSortBy> thenByImageUrl() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
+      thenByImageUrl() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'imageUrl', Sort.asc);
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterSortBy>
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
       thenByImageUrlDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'imageUrl', Sort.desc);
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterSortBy>
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
+      thenByIsFavorite() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isFavorite', Sort.asc);
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
+      thenByIsFavoriteDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isFavorite', Sort.desc);
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
       thenByThumbnailUrl() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'thumbnailUrl', Sort.asc);
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterSortBy>
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
       thenByThumbnailUrlDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'thumbnailUrl', Sort.desc);
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterSortBy> thenByWidth() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
+      thenByUniqueId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'uniqueId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
+      thenByUniqueIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'uniqueId', Sort.desc);
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
+      thenByWidth() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'width', Sort.asc);
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QAfterSortBy> thenByWidthDesc() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
+      thenByWidthDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'width', Sort.desc);
     });
   }
 }
 
-extension FavoriteImageQueryWhereDistinct
-    on QueryBuilder<FavoriteImage, FavoriteImage, QDistinct> {
-  QueryBuilder<FavoriteImage, FavoriteImage, QDistinct> distinctByCollection(
-      {bool caseSensitive = true}) {
+extension FavoriteImageCollectionQueryWhereDistinct on QueryBuilder<
+    FavoriteImageCollection, FavoriteImageCollection, QDistinct> {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QDistinct>
+      distinctByCollection({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'collection', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QDistinct> distinctByDatetime(
-      {bool caseSensitive = true}) {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QDistinct>
+      distinctByDatetime({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'datetime', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QDistinct>
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QDistinct>
       distinctByDisplaySitename({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'displaySitename',
@@ -1657,93 +1917,129 @@ extension FavoriteImageQueryWhereDistinct
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QDistinct> distinctByDocUrl(
-      {bool caseSensitive = true}) {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QDistinct>
+      distinctByDocUrl({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'docUrl', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QDistinct> distinctByHeight() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QDistinct>
+      distinctByHeight() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'height');
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QDistinct> distinctByImageUrl(
-      {bool caseSensitive = true}) {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QDistinct>
+      distinctByImageUrl({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'imageUrl', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QDistinct> distinctByThumbnailUrl(
-      {bool caseSensitive = true}) {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QDistinct>
+      distinctByIsFavorite() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'isFavorite');
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QDistinct>
+      distinctByThumbnailUrl({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'thumbnailUrl', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<FavoriteImage, FavoriteImage, QDistinct> distinctByWidth() {
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QDistinct>
+      distinctByUniqueId({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'uniqueId', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QDistinct>
+      distinctByWidth() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'width');
     });
   }
 }
 
-extension FavoriteImageQueryProperty
-    on QueryBuilder<FavoriteImage, FavoriteImage, QQueryProperty> {
-  QueryBuilder<FavoriteImage, int, QQueryOperations> idProperty() {
+extension FavoriteImageCollectionQueryProperty on QueryBuilder<
+    FavoriteImageCollection, FavoriteImageCollection, QQueryProperty> {
+  QueryBuilder<FavoriteImageCollection, int, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
     });
   }
 
-  QueryBuilder<FavoriteImage, String?, QQueryOperations> collectionProperty() {
+  QueryBuilder<FavoriteImageCollection, String?, QQueryOperations>
+      collectionProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'collection');
     });
   }
 
-  QueryBuilder<FavoriteImage, String?, QQueryOperations> datetimeProperty() {
+  QueryBuilder<FavoriteImageCollection, String?, QQueryOperations>
+      datetimeProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'datetime');
     });
   }
 
-  QueryBuilder<FavoriteImage, String?, QQueryOperations>
+  QueryBuilder<FavoriteImageCollection, String?, QQueryOperations>
       displaySitenameProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'displaySitename');
     });
   }
 
-  QueryBuilder<FavoriteImage, String?, QQueryOperations> docUrlProperty() {
+  QueryBuilder<FavoriteImageCollection, String?, QQueryOperations>
+      docUrlProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'docUrl');
     });
   }
 
-  QueryBuilder<FavoriteImage, int?, QQueryOperations> heightProperty() {
+  QueryBuilder<FavoriteImageCollection, int?, QQueryOperations>
+      heightProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'height');
     });
   }
 
-  QueryBuilder<FavoriteImage, String?, QQueryOperations> imageUrlProperty() {
+  QueryBuilder<FavoriteImageCollection, String?, QQueryOperations>
+      imageUrlProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'imageUrl');
     });
   }
 
-  QueryBuilder<FavoriteImage, String?, QQueryOperations>
+  QueryBuilder<FavoriteImageCollection, bool, QQueryOperations>
+      isFavoriteProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'isFavorite');
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, String?, QQueryOperations>
       thumbnailUrlProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'thumbnailUrl');
     });
   }
 
-  QueryBuilder<FavoriteImage, int?, QQueryOperations> widthProperty() {
+  QueryBuilder<FavoriteImageCollection, String, QQueryOperations>
+      uniqueIdProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'uniqueId');
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, int?, QQueryOperations>
+      widthProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'width');
     });
