@@ -49,6 +49,9 @@ dependencies:
   json_annotation: ^4.8.1
 
   cached_network_image: ^3.3.1
+  isar: ^3.1.0+1
+  isar_flutter_libs: ^3.1.0+1
+  path_provider: ^2.1.2
 
 dev_dependencies:
   flutter_test:
@@ -62,15 +65,20 @@ dev_dependencies:
   flutter_lints: ^2.0.0
 
   # ADD Library by KSH
-  build_runner:
+  build_runner: any
   custom_lint:
   riverpod_generator: ^2.3.9
   riverpod_lint: ^2.3.7
   injectable_generator:
+  isar_generator:
   retrofit_generator: ^8.0.4
   json_serializable: ^6.7.1
   flutter_dotenv: ^5.1.0
 
+#isar_generator 버전 충돌로 인한 추가
+dependency_overrides:
+  analyzer: ^6.3.0
+  meta: ^1.11.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
