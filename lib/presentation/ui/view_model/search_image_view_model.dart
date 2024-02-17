@@ -7,6 +7,13 @@ import 'package:search_image/domain/usecase/favorite_image_use_case.dart';
 import 'package:search_image/domain/usecase/search_image_use_case.dart';
 import 'package:search_image/presentation/ui/state/search_image_state.dart';
 
+final searchViewModelProvider =
+StateNotifierProvider<SearchImageViewModel, SearchImageState>(
+        (ref) => SearchImageViewModel());
+
+final searchQueryProvider = StateProvider<String>((ref) => '');
+
+
 class SearchImageViewModel extends StateNotifier<SearchImageState> {
   SearchImageViewModel() : super(SearchImageState());
 

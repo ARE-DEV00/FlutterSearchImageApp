@@ -4,20 +4,20 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:search_image/presentation/constants/RouteName.dart';
-import 'package:search_image/presentation/ui/state/search_image_state.dart';
 import 'package:search_image/presentation/ui/view_model/search_image_view_model.dart';
-
-final searchViewModelProvider =
-    StateNotifierProvider<SearchImageViewModel, SearchImageState>(
-        (ref) => SearchImageViewModel());
 
 class SearchImageListScreen extends ConsumerWidget {
   SearchImageListScreen({Key? key}) : super(key: key);
-  final _textQueryController = TextEditingController();
   final _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final textQueryController = TextEditingController(text: ref.watch(searchQueryProvider));
+
+    void updateSearchQuery(String query) {
+      ref.read(searchQueryProvider.notifier).state = query;
+    }
+
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
@@ -46,7 +46,7 @@ class SearchImageListScreen extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: TextField(
-                controller: _textQueryController,
+                controller: textQueryController,
                 decoration: InputDecoration(
                   labelText: "Search",
                   suffixIcon: IconButton(
@@ -58,18 +58,20 @@ class SearchImageListScreen extends ConsumerWidget {
                         }
                         ref
                             .read(searchViewModelProvider.notifier)
-                            .searchImages(_textQueryController.text);
+                            .searchImages(textQueryController.text);
                       }),
 
                 ),
                 onSubmitted: (String value) {
+                  updateSearchQuery(value);
+
                   FocusScope.of(context).unfocus();
                   if (_scrollController.hasClients) {
                     _scrollController.jumpTo(0);
                   }
                   ref
                       .read(searchViewModelProvider.notifier)
-                      .searchImages(_textQueryController.text);
+                      .searchImages(textQueryController.text);
                 },
                 textInputAction: TextInputAction.search,
               ),
@@ -86,7 +88,7 @@ class SearchImageListScreen extends ConsumerWidget {
                     onRefresh: () async {
                       ref
                           .read(searchViewModelProvider.notifier)
-                          .searchImages(_textQueryController.text);
+                          .searchImages(textQueryController.text);
                     },
                     child: GridView.builder(
                       controller: _scrollController,
