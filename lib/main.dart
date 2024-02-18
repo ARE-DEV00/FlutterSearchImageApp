@@ -13,6 +13,7 @@ import 'package:search_image/data/remote/api/api_service.dart';
 import 'package:search_image/data/remote/api/repository/api_repository_impl.dart';
 import 'package:search_image/domain/repository/data_base_repository.dart';
 import 'package:search_image/presentation/constants/RouteName.dart';
+import 'package:search_image/presentation/ui/screen/favorite_list_screen.dart';
 import 'package:search_image/presentation/ui/screen/home_screen.dart';
 import 'package:search_image/presentation/ui/screen/image_view_screen.dart';
 import 'package:search_image/presentation/ui/screen/search_image_list_screen.dart';
@@ -91,9 +92,10 @@ class MyApp extends ConsumerWidget {
         themeMode: ThemeMode.system,
         initialRoute: RouteName.homeScreen,
         routes: {
-          RouteName.homeScreen: (context) => HomeScreen(),
-          RouteName.searchImageListScreen: (context) => SearchImageListScreen(),
-          RouteName.imageViewScreen: (context) => ImageViewScreen(),
+          RouteName.homeScreen: (context) => const HomeScreen(),
+          RouteName.imageViewScreen: (context) => const ImageViewScreen(),
+          //RouteName.searchImageListScreen: (context) => const SearchImageListScreen(),
+          //RouteName.favoriteImageListScreen: (context) => const FavoriteListScreen(),
 
         });
   }

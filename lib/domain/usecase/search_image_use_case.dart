@@ -13,6 +13,8 @@ class SearchImageUseCase {
 
   Future<SearchImageResultEntity> getSearchImageList(String query, int page) async {
     final searchResult = await _apiRepository.getSearchImageList(query, SortType.accuracy.name, page, 30);
+
+    /// 이미지가 즐겨찾기에 추가되어 있는지 확인
     for (var imageInfoEntity in searchResult.imageInfoEntityList) {
       final isFavorite = await _dataBaseRepository.isExistFavoriteImage(imageInfoEntity);
       imageInfoEntity.isFavorite = isFavorite;

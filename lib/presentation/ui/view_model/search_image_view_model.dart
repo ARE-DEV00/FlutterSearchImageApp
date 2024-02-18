@@ -13,6 +13,8 @@ StateNotifierProvider<SearchImageViewModel, SearchImageState>(
 
 final searchQueryProvider = StateProvider<String>((ref) => '');
 
+final scrollPositionProvider = StateProvider<double>((ref) => 0.0);
+
 
 class SearchImageViewModel extends StateNotifier<SearchImageState> {
   SearchImageViewModel() : super(SearchImageState());
@@ -23,10 +25,10 @@ class SearchImageViewModel extends StateNotifier<SearchImageState> {
   List<ImageInfoEntity> _searchImageEntityList = [];
   SearchImageResultMetaEntity? _searchResultMeta;
   int _page = 1;
-  String _query = '';
+  String? _query;
 
   Future<void> searchImages(String query) async {
-    reset();
+    _reset();
 
     if (query.isEmpty) {
       state = SearchImageState(imageInfoEntityList: []);
@@ -34,10 +36,26 @@ class SearchImageViewModel extends StateNotifier<SearchImageState> {
     }
 
     _query = query;
-    final searchImageListEntity =
-        await _searchImageUseCase.getSearchImageList(query, _page++);
+    final searchImageListEntity = await _searchImageUseCase.getSearchImageList(query, _page++);
     _searchResultMeta = searchImageListEntity.searchImageResultMetaEntity;
     _searchImageEntityList = searchImageListEntity.imageInfoEntityList;
+    state = SearchImageState(imageInfoEntityList: _searchImageEntityList);
+  }
+
+  Future<void> loadCurrentSearchImages() async {
+    if(_searchImageEntityList.isEmpty){
+      return;
+    }
+    final favoriteImageList = await _favoriteImageUseCase.getFavoriteImageList();
+    for (var searchImage in _searchImageEntityList) {
+      searchImage.isFavorite = false; // 초기화
+      for (var favoriteImage in favoriteImageList) {
+        if (favoriteImage.uniqueId == searchImage.uniqueId) {
+          searchImage.isFavorite = true;
+        }
+      }
+    }
+
     state = SearchImageState(imageInfoEntityList: _searchImageEntityList);
   }
 
@@ -50,13 +68,13 @@ class SearchImageViewModel extends StateNotifier<SearchImageState> {
     }
 
     // 검색어가 없는 경우
-    if (_query.isEmpty) {
+    if (_query?.isEmpty == true) {
       state = SearchImageState(imageInfoEntityList: []);
       return;
     }
 
     final searchImageListEntity =
-        await _searchImageUseCase.getSearchImageList(_query, _page++);
+        await _searchImageUseCase.getSearchImageList(_query!, _page++);
     _searchResultMeta = searchImageListEntity.searchImageResultMetaEntity;
     _searchImageEntityList += searchImageListEntity.imageInfoEntityList;
     state = SearchImageState(imageInfoEntityList: _searchImageEntityList);
@@ -65,27 +83,28 @@ class SearchImageViewModel extends StateNotifier<SearchImageState> {
   Future<void> addFavoriteImage(ImageInfoEntity imageInfoEntity) async {
     log('#### addFavoriteImage');
     await _favoriteImageUseCase.addFavoriteImage(imageInfoEntity);
-    for (var element in _searchImageEntityList) {
-      if (element.uniqueId == imageInfoEntity.uniqueId) {
-        element.isFavorite = true;
-      }
-    }
-    state = SearchImageState(imageInfoEntityList: _searchImageEntityList);
+    loadCurrentSearchImages();
   }
 
   Future<void> removeFavoriteImage(ImageInfoEntity imageInfoEntity) async {
     await _favoriteImageUseCase.removeFavoriteImage(imageInfoEntity);
-    for (var element in _searchImageEntityList) {
-      if (element.uniqueId == imageInfoEntity.uniqueId) {
-        element.isFavorite = false;
+    loadCurrentSearchImages();
+  }
+
+  Future<void> syncFavoriteImage(ImageInfoEntity imageInfoEntity) async {
+    for (var searchImage in _searchImageEntityList) {
+      if (searchImage.uniqueId == imageInfoEntity.uniqueId) {
+        searchImage.isFavorite = imageInfoEntity.isFavorite;
       }
     }
     state = SearchImageState(imageInfoEntityList: _searchImageEntityList);
   }
 
-  void reset() {
+
+
+  void _reset() {
     _page = 1;
-    _query = '';
+    _query = null;
     _searchImageEntityList = [];
     _searchResultMeta = null;
   }

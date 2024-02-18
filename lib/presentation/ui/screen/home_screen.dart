@@ -13,8 +13,8 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedIndex = ref.watch(bottomNavigationProvider);
     final screens = [
-      SearchImageListScreen(),
-      FavoriteListScreen()
+      const SearchImageListScreen(),
+      const FavoriteListScreen()
     ];
     return Scaffold(
       body: screens[selectedIndex],
