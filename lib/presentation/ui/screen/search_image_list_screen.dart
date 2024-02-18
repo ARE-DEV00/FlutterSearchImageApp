@@ -3,29 +3,29 @@ import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:rxdart/rxdart.dart';
+import 'package:search_image/domain/entity/image_info_entitiy.dart';
 import 'package:search_image/presentation/constants/RouteName.dart';
 import 'package:search_image/presentation/ui/view_model/search_image_view_model.dart';
+import 'package:search_image/presentation/utils/event_bus.dart';
 
 class SearchImageListScreen extends ConsumerWidget {
-  SearchImageListScreen({Key? key}) : super(key: key);
-  final _scrollController = ScrollController();
+  const SearchImageListScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final textQueryController = TextEditingController(text: ref.watch(searchQueryProvider));
+    final scrollPosition = ref.watch(scrollPositionProvider);
+    final ScrollController scrollController = ScrollController(initialScrollOffset: scrollPosition);
 
-    void updateSearchQuery(String query) {
-      ref.read(searchQueryProvider.notifier).state = query;
-    }
-
-    _scrollController.addListener(() {
-      if (_scrollController.position.pixels ==
-          _scrollController.position.maxScrollExtent) {
-        // Load more data
-        log('##### _scrollController');
+    scrollController.addListener(() {
+      ref.read(scrollPositionProvider.notifier).state = scrollController.position.pixels;
+      if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
         ref.read(searchViewModelProvider.notifier).loadMoreSearchImages();
       }
     });
+
+    ref.read(searchViewModelProvider.notifier).loadCurrentSearchImages();
 
     return Scaffold(
       appBar: AppBar(
@@ -53,25 +53,15 @@ class SearchImageListScreen extends ConsumerWidget {
                       icon: const Icon(Icons.search),
                       onPressed: () {
                         FocusScope.of(context).unfocus();
-                        if (_scrollController.hasClients) {
-                          _scrollController.jumpTo(0);
-                        }
-                        ref
-                            .read(searchViewModelProvider.notifier)
-                            .searchImages(textQueryController.text);
+                        _updateSearchQuery(textQueryController.text, ref);
+                        _searchImages(textQueryController.text, scrollController, ref);
                       }),
 
                 ),
                 onSubmitted: (String value) {
-                  updateSearchQuery(value);
-
                   FocusScope.of(context).unfocus();
-                  if (_scrollController.hasClients) {
-                    _scrollController.jumpTo(0);
-                  }
-                  ref
-                      .read(searchViewModelProvider.notifier)
-                      .searchImages(textQueryController.text);
+                  _updateSearchQuery(value, ref);
+                  _searchImages(value, scrollController, ref);
                 },
                 textInputAction: TextInputAction.search,
               ),
@@ -81,9 +71,11 @@ class SearchImageListScreen extends ConsumerWidget {
                 builder: (context, ref, child) {
                   final searchState = ref.watch(searchViewModelProvider);
                   final searchResults = searchState.imageInfoEntityList;
+
                   if (searchResults.isEmpty) {
                     return const Center(child: Text("검색된 이미지가 없습니다."));
                   }
+
                   return RefreshIndicator(
                     onRefresh: () async {
                       ref
@@ -91,7 +83,7 @@ class SearchImageListScreen extends ConsumerWidget {
                           .searchImages(textQueryController.text);
                     },
                     child: GridView.builder(
-                      controller: _scrollController,
+                      controller: scrollController,
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,
@@ -150,7 +142,7 @@ class SearchImageListScreen extends ConsumerWidget {
                                       imageUrl: imageUrl,
                                       fit: BoxFit.cover,
                                       errorWidget: (context, url, error) =>
-                                          Icon(Icons.error),
+                                          const Icon(Icons.error),
                                     )
                                   : const Icon(Icons.image_not_supported),
                             ));
@@ -164,5 +156,15 @@ class SearchImageListScreen extends ConsumerWidget {
         ),
       ),
     );
+  }
+
+  void _updateSearchQuery(String query, WidgetRef ref) {
+    ref.read(searchQueryProvider.notifier).state = query;
+  }
+  void _searchImages(String query, ScrollController scrollController, WidgetRef ref) {
+    if (scrollController.hasClients) {
+      scrollController.jumpTo(0);
+    }
+    ref.read(searchViewModelProvider.notifier).searchImages(query);
   }
 }
