@@ -18,10 +18,16 @@ class ImageViewScreen extends ConsumerWidget {
           children: [
             Center(
               child: imageUrl.isNotEmpty
-                  ? Image.network(imageUrl,
-                      fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) =>
-                          const Icon(Icons.error, color: Colors.white,))
+                  ? InteractiveViewer(
+                      minScale: 0.1,
+                      maxScale: 10.0,
+                      child: Image.network(imageUrl,
+                          width: double.infinity,
+                          height: double.infinity,
+                          fit: BoxFit.contain,
+                          errorBuilder: (context, error, stackTrace) =>
+                              const Icon(Icons.error, color: Colors.white)),
+                    )
                   : const Icon(Icons.image_not_supported, color: Colors.white),
             ),
             Positioned(
