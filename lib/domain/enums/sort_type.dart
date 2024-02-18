@@ -1,0 +1,2 @@
+
+enum SortType { accuracy, recency }

@@ -1,8 +1,8 @@
-import 'package:search_image/domain/entity/sample_entity.dart';
+import 'package:search_image/domain/entity/search_image_result_entity.dart';
 
 abstract class ApiRepository {
 
-  Future<SampleEntity?> createSample(String description);
+  Future<SearchImageResultEntity> getSearchImageList(String query, String? sort, int? page, int? size);
 
 
 }
