@@ -1,18 +1,19 @@
-import 'package:search_image/data/remote/model/search_image_response.dart';
+
 import 'package:search_image/domain/entity/image_info_entitiy.dart';
+import 'package:search_image/domain/entity/search_image_list_meta_entity.dart';
 
 class SearchImageState {
-  final SearchResultMeta? searchResultMeta;
+  final SearchImageResultMetaEntity? searchImageResultMetaEntity;
   final List<ImageInfoEntity> imageInfoEntityList;
 
   SearchImageState(
-      {this.searchResultMeta, this.imageInfoEntityList = const []});
+      {this.searchImageResultMetaEntity, this.imageInfoEntityList = const []});
 
   SearchImageState copyWith(
-      {SearchResultMeta? searchResultMeta,
+      {SearchImageResultMetaEntity? searchImageResultMetaEntity,
       List<ImageInfoEntity>? imageInfoEntityList}) {
     return SearchImageState(
-      searchResultMeta: searchResultMeta ?? this.searchResultMeta,
+      searchImageResultMetaEntity: searchImageResultMetaEntity ?? this.searchImageResultMetaEntity,
       imageInfoEntityList: imageInfoEntityList ?? this.imageInfoEntityList,
     );
   }
