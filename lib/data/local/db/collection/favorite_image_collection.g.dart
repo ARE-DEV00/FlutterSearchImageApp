@@ -53,18 +53,28 @@ const FavoriteImageCollectionSchema = CollectionSchema(
       name: r'isFavorite',
       type: IsarType.bool,
     ),
-    r'thumbnailUrl': PropertySchema(
+    r'modifyDate': PropertySchema(
       id: 7,
+      name: r'modifyDate',
+      type: IsarType.dateTime,
+    ),
+    r'registerDate': PropertySchema(
+      id: 8,
+      name: r'registerDate',
+      type: IsarType.dateTime,
+    ),
+    r'thumbnailUrl': PropertySchema(
+      id: 9,
       name: r'thumbnailUrl',
       type: IsarType.string,
     ),
     r'uniqueId': PropertySchema(
-      id: 8,
+      id: 10,
       name: r'uniqueId',
       type: IsarType.string,
     ),
     r'width': PropertySchema(
-      id: 9,
+      id: 11,
       name: r'width',
       type: IsarType.long,
     )
@@ -142,9 +152,11 @@ void _favoriteImageCollectionSerialize(
   writer.writeLong(offsets[4], object.height);
   writer.writeString(offsets[5], object.imageUrl);
   writer.writeBool(offsets[6], object.isFavorite);
-  writer.writeString(offsets[7], object.thumbnailUrl);
-  writer.writeString(offsets[8], object.uniqueId);
-  writer.writeLong(offsets[9], object.width);
+  writer.writeDateTime(offsets[7], object.modifyDate);
+  writer.writeDateTime(offsets[8], object.registerDate);
+  writer.writeString(offsets[9], object.thumbnailUrl);
+  writer.writeString(offsets[10], object.uniqueId);
+  writer.writeLong(offsets[11], object.width);
 }
 
 FavoriteImageCollection _favoriteImageCollectionDeserialize(
@@ -161,11 +173,13 @@ FavoriteImageCollection _favoriteImageCollectionDeserialize(
     height: reader.readLongOrNull(offsets[4]),
     imageUrl: reader.readStringOrNull(offsets[5]),
     isFavorite: reader.readBool(offsets[6]),
-    thumbnailUrl: reader.readStringOrNull(offsets[7]),
-    uniqueId: reader.readString(offsets[8]),
-    width: reader.readLongOrNull(offsets[9]),
+    thumbnailUrl: reader.readStringOrNull(offsets[9]),
+    uniqueId: reader.readString(offsets[10]),
+    width: reader.readLongOrNull(offsets[11]),
   );
   object.id = id;
+  object.modifyDate = reader.readDateTime(offsets[7]);
+  object.registerDate = reader.readDateTime(offsets[8]);
   return object;
 }
 
@@ -191,10 +205,14 @@ P _favoriteImageCollectionDeserializeProp<P>(
     case 6:
       return (reader.readBool(offset)) as P;
     case 7:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readDateTime(offset)) as P;
     case 8:
-      return (reader.readString(offset)) as P;
+      return (reader.readDateTime(offset)) as P;
     case 9:
+      return (reader.readStringOrNull(offset)) as P;
+    case 10:
+      return (reader.readString(offset)) as P;
+    case 11:
       return (reader.readLongOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -1219,6 +1237,118 @@ extension FavoriteImageCollectionQueryFilter on QueryBuilder<
   }
 
   QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> modifyDateEqualTo(DateTime value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'modifyDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> modifyDateGreaterThan(
+    DateTime value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'modifyDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> modifyDateLessThan(
+    DateTime value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'modifyDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> modifyDateBetween(
+    DateTime lower,
+    DateTime upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'modifyDate',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> registerDateEqualTo(DateTime value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'registerDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> registerDateGreaterThan(
+    DateTime value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'registerDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> registerDateLessThan(
+    DateTime value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'registerDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
+      QAfterFilterCondition> registerDateBetween(
+    DateTime lower,
+    DateTime upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'registerDate',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
       QAfterFilterCondition> thumbnailUrlIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -1694,6 +1824,34 @@ extension FavoriteImageCollectionQuerySortBy
   }
 
   QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
+      sortByModifyDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'modifyDate', Sort.asc);
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
+      sortByModifyDateDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'modifyDate', Sort.desc);
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
+      sortByRegisterDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'registerDate', Sort.asc);
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
+      sortByRegisterDateDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'registerDate', Sort.desc);
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
       sortByThumbnailUrl() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'thumbnailUrl', Sort.asc);
@@ -1851,6 +2009,34 @@ extension FavoriteImageCollectionQuerySortThenBy on QueryBuilder<
   }
 
   QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
+      thenByModifyDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'modifyDate', Sort.asc);
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
+      thenByModifyDateDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'modifyDate', Sort.desc);
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
+      thenByRegisterDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'registerDate', Sort.asc);
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
+      thenByRegisterDateDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'registerDate', Sort.desc);
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
       thenByThumbnailUrl() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'thumbnailUrl', Sort.asc);
@@ -1946,6 +2132,20 @@ extension FavoriteImageCollectionQueryWhereDistinct on QueryBuilder<
   }
 
   QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QDistinct>
+      distinctByModifyDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'modifyDate');
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QDistinct>
+      distinctByRegisterDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'registerDate');
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QDistinct>
       distinctByThumbnailUrl({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'thumbnailUrl', caseSensitive: caseSensitive);
@@ -2021,6 +2221,20 @@ extension FavoriteImageCollectionQueryProperty on QueryBuilder<
       isFavoriteProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'isFavorite');
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, DateTime, QQueryOperations>
+      modifyDateProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'modifyDate');
+    });
+  }
+
+  QueryBuilder<FavoriteImageCollection, DateTime, QQueryOperations>
+      registerDateProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'registerDate');
     });
   }
 
