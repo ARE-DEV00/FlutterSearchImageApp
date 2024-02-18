@@ -1,9 +1,7 @@
-import 'dart:developer';
-
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:search_image/presentation/constants/RouteName.dart';
+import 'package:search_image/presentation/ui/component/image_list_item.dart';
 import 'package:search_image/presentation/ui/view_model/favorite_image_view_model.dart';
 
 
@@ -58,58 +56,22 @@ class FavoriteListScreen extends ConsumerWidget {
               itemBuilder: (context, index) {
                 final imageUrl = imageInfoEntityList[index].imageUrl ?? '';
                 final isFavorite = imageInfoEntityList[index].isFavorite;
-                log('#### isFavorite:$isFavorite / $index');
-                return GridTile(
-                    header: Container(
-                        alignment: Alignment.topRight,
-                        padding: const EdgeInsets.all(1.0),
-                        child: IconButton(
-                          icon: isFavorite? const Icon(Icons.favorite,
-                              color: Colors.red):const Icon(Icons.favorite_outline,
-                              color: Colors.white),
-                          onPressed: () async {
-                            if(!isFavorite){
-                              ref.read(favoriteViewModelProvider.notifier).addFavoriteImage(imageInfoEntityList[index]);
-                            }else{
-                              ref.read(favoriteViewModelProvider.notifier).removeFavoriteImage(imageInfoEntityList[index]);
-                            }
-                          },
-                        )
-                    ),
-                    footer: Container(
-                      padding: const EdgeInsets.all(8.0),
-                      color: Colors.black54,
-                      child: Row(
-                        mainAxisAlignment:
-                        MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              imageInfoEntityList[index].displaySitename ??
-                                  'Unknown',
-                              style: const TextStyle(
-                                  fontSize: 12, color: Colors.white),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.of(context).pushNamed(
-                            RouteName.imageViewScreen,
-                            arguments: imageUrl);
-                      },
-                      child: imageUrl.isNotEmpty
-                          ? CachedNetworkImage(
-                        imageUrl: imageUrl,
-                        fit: BoxFit.cover,
-                        errorWidget: (context, url, error) =>
-                            Icon(Icons.error),
-                      )
-                          : const Icon(Icons.image_not_supported),
-                    ));
+
+                return ImageListItem(
+                  imageInfo: imageInfoEntityList[index],
+                  onTapFavorite: () {
+                    if (!isFavorite) {
+                      ref.read(favoriteViewModelProvider.notifier).addFavoriteImage(imageInfoEntityList[index]);
+                    } else {
+                      ref.read(favoriteViewModelProvider.notifier).removeFavoriteImage(imageInfoEntityList[index]);
+                    }
+                  },
+                  onTapImage: (){
+                    Navigator.of(context).pushNamed(
+                        RouteName.imageViewScreen,
+                        arguments: imageUrl);
+                  },
+                );
               },
             );
           },

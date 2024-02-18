@@ -20,7 +20,7 @@ class ApiRepositoryImpl implements ApiRepository {
           await _apiService.getSearchImageList(query, sort, page, size);
 
       if (response != null) {
-        log("[KSH]response - OK");
+        log('[KSH]response - OK');
         final searchImageResultMetaEntity = SearchImageResultMetaEntity(
           isEnd: response.meta.isEnd,
           pageableCount: response.meta.pageableCount,
@@ -42,10 +42,10 @@ class ApiRepositoryImpl implements ApiRepository {
                 height: value.height,
                 thumbnailUrl: value.thumbnailUrl,
                 width: value.width,
-                displaySitename: value.displaySitename,
+                displaySiteName: value.displaySiteName,
                 uniqueId: CommonDataUtil.generateUniqueId(
                     collection: value.collection,
-                    displaySitename: value.displaySitename,
+                    displaySiteName: value.displaySiteName,
                     imageUrl: value.imageUrl,
                     datetime: value.datetime),
                 isFavorite: false);
@@ -58,12 +58,12 @@ class ApiRepositoryImpl implements ApiRepository {
         }
       } else {
         // API 호출은 성공했지만 응답이 오지 않은 경우
-        log("[KSH]response - Fail");
+        log('[KSH]response - Fail');
         return SearchImageResultEntity(imageInfoEntityList: []);
       }
     } catch (e) {
       // API 호출 중 에러가 발생한 경우
-      log("[KSH]response - ERROR");
+      log('[KSH]response - ERROR');
       return SearchImageResultEntity(imageInfoEntityList: []);
     }
   }

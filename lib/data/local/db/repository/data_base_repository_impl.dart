@@ -13,7 +13,7 @@ class DataBaseRepositoryImpl implements DataBaseRepository {
     final favoriteImageCollection = FavoriteImageCollection(
       uniqueId: CommonDataUtil.generateUniqueId(
           collection: imageInfoEntity.collection,
-          displaySitename: imageInfoEntity.displaySitename,
+          displaySiteName: imageInfoEntity.displaySiteName,
           imageUrl: imageInfoEntity.imageUrl,
           datetime: imageInfoEntity.datetime),
       collection: imageInfoEntity.collection,
@@ -22,7 +22,7 @@ class DataBaseRepositoryImpl implements DataBaseRepository {
       width: imageInfoEntity.width,
       height: imageInfoEntity.height,
       docUrl: imageInfoEntity.docUrl,
-      displaySitename: imageInfoEntity.displaySitename,
+      displaySiteName: imageInfoEntity.displaySiteName,
       datetime: imageInfoEntity.datetime,
       isFavorite: true,
     );
@@ -36,7 +36,7 @@ class DataBaseRepositoryImpl implements DataBaseRepository {
         .map((favoriteImage) => ImageInfoEntity(
               uniqueId: CommonDataUtil.generateUniqueId(
                   collection: favoriteImage.collection ?? '',
-                  displaySitename: favoriteImage.displaySitename ?? '',
+                  displaySiteName: favoriteImage.displaySiteName ?? '',
                   imageUrl: favoriteImage.imageUrl ?? '',
                   datetime: favoriteImage.datetime ?? ''),
               collection: favoriteImage.collection ?? '',
@@ -45,7 +45,7 @@ class DataBaseRepositoryImpl implements DataBaseRepository {
               width: favoriteImage.width ?? 0,
               height: favoriteImage.height ?? 0,
               docUrl: favoriteImage.docUrl ?? '',
-              displaySitename: favoriteImage.displaySitename ?? '',
+              displaySiteName: favoriteImage.displaySiteName ?? '',
               datetime: favoriteImage.datetime ?? '',
               isFavorite: true,
             ))
@@ -56,7 +56,7 @@ class DataBaseRepositoryImpl implements DataBaseRepository {
   Future<bool> isExistFavoriteImage(ImageInfoEntity imageInfoEntity) async {
     final uniqueId = CommonDataUtil.generateUniqueId(
         collection: imageInfoEntity.collection,
-        displaySitename: imageInfoEntity.displaySitename,
+        displaySiteName: imageInfoEntity.displaySiteName,
         imageUrl: imageInfoEntity.imageUrl,
         datetime: imageInfoEntity.datetime);
     final favoriteImage =
@@ -68,7 +68,7 @@ class DataBaseRepositoryImpl implements DataBaseRepository {
   Future<void> removeFavoriteImage(ImageInfoEntity imageInfoEntity) async {
     final uniqueId = CommonDataUtil.generateUniqueId(
         collection: imageInfoEntity.collection,
-        displaySitename: imageInfoEntity.displaySitename,
+        displaySiteName: imageInfoEntity.displaySiteName,
         imageUrl: imageInfoEntity.imageUrl,
         datetime: imageInfoEntity.datetime);
 

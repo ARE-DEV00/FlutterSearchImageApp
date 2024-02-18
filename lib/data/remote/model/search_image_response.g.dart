@@ -26,7 +26,7 @@ ImageInfo _$ImageInfoFromJson(Map<String, dynamic> json) => ImageInfo(
       imageUrl: json['image_url'] as String,
       width: json['width'] as int,
       height: json['height'] as int,
-      displaySitename: json['display_sitename'] as String,
+      displaySiteName: json['display_sitename'] as String,
       docUrl: json['doc_url'] as String,
       datetime: json['datetime'] as String,
     );
@@ -37,7 +37,7 @@ Map<String, dynamic> _$ImageInfoToJson(ImageInfo instance) => <String, dynamic>{
       'image_url': instance.imageUrl,
       'width': instance.width,
       'height': instance.height,
-      'display_sitename': instance.displaySitename,
+      'display_sitename': instance.displaySiteName,
       'doc_url': instance.docUrl,
       'datetime': instance.datetime,
     };
