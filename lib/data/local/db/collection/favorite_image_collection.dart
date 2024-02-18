@@ -12,7 +12,7 @@ class FavoriteImageCollection {
   int? width;
   int? height;
   String? docUrl;
-  String? displaySitename;
+  String? displaySiteName;
   String? datetime;
   bool isFavorite = false;
 
@@ -24,7 +24,7 @@ class FavoriteImageCollection {
     this.width,
     this.height,
     this.docUrl,
-    this.displaySitename,
+    this.displaySiteName,
     this.datetime,
     required bool isFavorite,
   });

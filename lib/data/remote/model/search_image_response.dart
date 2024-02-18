@@ -31,7 +31,7 @@ class ImageInfo {
   final int width;
   final int height;
   @JsonKey(name: 'display_sitename')
-  final String displaySitename;
+  final String displaySiteName;
   @JsonKey(name: 'doc_url')
   final String docUrl;
   final String datetime;
@@ -42,7 +42,7 @@ class ImageInfo {
     required this.imageUrl,
     required this.width,
     required this.height,
-    required this.displaySitename,
+    required this.displaySiteName,
     required this.docUrl,
     required this.datetime,
   });

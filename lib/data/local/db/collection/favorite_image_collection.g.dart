@@ -28,9 +28,9 @@ const FavoriteImageCollectionSchema = CollectionSchema(
       name: r'datetime',
       type: IsarType.string,
     ),
-    r'displaySitename': PropertySchema(
+    r'displaySiteName': PropertySchema(
       id: 2,
-      name: r'displaySitename',
+      name: r'displaySiteName',
       type: IsarType.string,
     ),
     r'docUrl': PropertySchema(
@@ -102,7 +102,7 @@ int _favoriteImageCollectionEstimateSize(
     }
   }
   {
-    final value = object.displaySitename;
+    final value = object.displaySiteName;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
@@ -137,7 +137,7 @@ void _favoriteImageCollectionSerialize(
 ) {
   writer.writeString(offsets[0], object.collection);
   writer.writeString(offsets[1], object.datetime);
-  writer.writeString(offsets[2], object.displaySitename);
+  writer.writeString(offsets[2], object.displaySiteName);
   writer.writeString(offsets[3], object.docUrl);
   writer.writeLong(offsets[4], object.height);
   writer.writeString(offsets[5], object.imageUrl);
@@ -156,7 +156,7 @@ FavoriteImageCollection _favoriteImageCollectionDeserialize(
   final object = FavoriteImageCollection(
     collection: reader.readStringOrNull(offsets[0]),
     datetime: reader.readStringOrNull(offsets[1]),
-    displaySitename: reader.readStringOrNull(offsets[2]),
+    displaySiteName: reader.readStringOrNull(offsets[2]),
     docUrl: reader.readStringOrNull(offsets[3]),
     height: reader.readLongOrNull(offsets[4]),
     imageUrl: reader.readStringOrNull(offsets[5]),
@@ -611,31 +611,31 @@ extension FavoriteImageCollectionQueryFilter on QueryBuilder<
   }
 
   QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
-      QAfterFilterCondition> displaySitenameIsNull() {
+      QAfterFilterCondition> displaySiteNameIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'displaySitename',
+        property: r'displaySiteName',
       ));
     });
   }
 
   QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
-      QAfterFilterCondition> displaySitenameIsNotNull() {
+      QAfterFilterCondition> displaySiteNameIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'displaySitename',
+        property: r'displaySiteName',
       ));
     });
   }
 
   QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
-      QAfterFilterCondition> displaySitenameEqualTo(
+      QAfterFilterCondition> displaySiteNameEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'displaySitename',
+        property: r'displaySiteName',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -643,7 +643,7 @@ extension FavoriteImageCollectionQueryFilter on QueryBuilder<
   }
 
   QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
-      QAfterFilterCondition> displaySitenameGreaterThan(
+      QAfterFilterCondition> displaySiteNameGreaterThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -651,7 +651,7 @@ extension FavoriteImageCollectionQueryFilter on QueryBuilder<
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'displaySitename',
+        property: r'displaySiteName',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -659,7 +659,7 @@ extension FavoriteImageCollectionQueryFilter on QueryBuilder<
   }
 
   QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
-      QAfterFilterCondition> displaySitenameLessThan(
+      QAfterFilterCondition> displaySiteNameLessThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -667,7 +667,7 @@ extension FavoriteImageCollectionQueryFilter on QueryBuilder<
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'displaySitename',
+        property: r'displaySiteName',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -675,7 +675,7 @@ extension FavoriteImageCollectionQueryFilter on QueryBuilder<
   }
 
   QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
-      QAfterFilterCondition> displaySitenameBetween(
+      QAfterFilterCondition> displaySiteNameBetween(
     String? lower,
     String? upper, {
     bool includeLower = true,
@@ -684,7 +684,7 @@ extension FavoriteImageCollectionQueryFilter on QueryBuilder<
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'displaySitename',
+        property: r'displaySiteName',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -695,13 +695,13 @@ extension FavoriteImageCollectionQueryFilter on QueryBuilder<
   }
 
   QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
-      QAfterFilterCondition> displaySitenameStartsWith(
+      QAfterFilterCondition> displaySiteNameStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'displaySitename',
+        property: r'displaySiteName',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -709,13 +709,13 @@ extension FavoriteImageCollectionQueryFilter on QueryBuilder<
   }
 
   QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
-      QAfterFilterCondition> displaySitenameEndsWith(
+      QAfterFilterCondition> displaySiteNameEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'displaySitename',
+        property: r'displaySiteName',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -724,10 +724,10 @@ extension FavoriteImageCollectionQueryFilter on QueryBuilder<
 
   QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
           QAfterFilterCondition>
-      displaySitenameContains(String value, {bool caseSensitive = true}) {
+      displaySiteNameContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
-        property: r'displaySitename',
+        property: r'displaySiteName',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -736,10 +736,10 @@ extension FavoriteImageCollectionQueryFilter on QueryBuilder<
 
   QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
           QAfterFilterCondition>
-      displaySitenameMatches(String pattern, {bool caseSensitive = true}) {
+      displaySiteNameMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
-        property: r'displaySitename',
+        property: r'displaySiteName',
         wildcard: pattern,
         caseSensitive: caseSensitive,
       ));
@@ -747,20 +747,20 @@ extension FavoriteImageCollectionQueryFilter on QueryBuilder<
   }
 
   QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
-      QAfterFilterCondition> displaySitenameIsEmpty() {
+      QAfterFilterCondition> displaySiteNameIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'displaySitename',
+        property: r'displaySiteName',
         value: '',
       ));
     });
   }
 
   QueryBuilder<FavoriteImageCollection, FavoriteImageCollection,
-      QAfterFilterCondition> displaySitenameIsNotEmpty() {
+      QAfterFilterCondition> displaySiteNameIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'displaySitename',
+        property: r'displaySiteName',
         value: '',
       ));
     });
@@ -1624,16 +1624,16 @@ extension FavoriteImageCollectionQuerySortBy
   }
 
   QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
-      sortByDisplaySitename() {
+      sortByDisplaySiteName() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'displaySitename', Sort.asc);
+      return query.addSortBy(r'displaySiteName', Sort.asc);
     });
   }
 
   QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
-      sortByDisplaySitenameDesc() {
+      sortByDisplaySiteNameDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'displaySitename', Sort.desc);
+      return query.addSortBy(r'displaySiteName', Sort.desc);
     });
   }
 
@@ -1767,16 +1767,16 @@ extension FavoriteImageCollectionQuerySortThenBy on QueryBuilder<
   }
 
   QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
-      thenByDisplaySitename() {
+      thenByDisplaySiteName() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'displaySitename', Sort.asc);
+      return query.addSortBy(r'displaySiteName', Sort.asc);
     });
   }
 
   QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QAfterSortBy>
-      thenByDisplaySitenameDesc() {
+      thenByDisplaySiteNameDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'displaySitename', Sort.desc);
+      return query.addSortBy(r'displaySiteName', Sort.desc);
     });
   }
 
@@ -1910,9 +1910,9 @@ extension FavoriteImageCollectionQueryWhereDistinct on QueryBuilder<
   }
 
   QueryBuilder<FavoriteImageCollection, FavoriteImageCollection, QDistinct>
-      distinctByDisplaySitename({bool caseSensitive = true}) {
+      distinctByDisplaySiteName({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'displaySitename',
+      return query.addDistinctBy(r'displaySiteName',
           caseSensitive: caseSensitive);
     });
   }
@@ -1990,9 +1990,9 @@ extension FavoriteImageCollectionQueryProperty on QueryBuilder<
   }
 
   QueryBuilder<FavoriteImageCollection, String?, QQueryOperations>
-      displaySitenameProperty() {
+      displaySiteNameProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'displaySitename');
+      return query.addPropertyName(r'displaySiteName');
     });
   }
 

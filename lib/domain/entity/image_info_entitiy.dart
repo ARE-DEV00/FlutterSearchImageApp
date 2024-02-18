@@ -7,7 +7,7 @@ class ImageInfoEntity {
   final int width;
   final int height;
   final String docUrl;
-  final String displaySitename;
+  final String displaySiteName;
   final String datetime;
   bool isFavorite = false; /// 즐겨찾기 여부 추가
 
@@ -18,7 +18,7 @@ class ImageInfoEntity {
     required this.width,
     required this.height,
     required this.docUrl,
-    required this.displaySitename,
+    required this.displaySiteName,
     required this.datetime,
     required this.uniqueId,
     required this.isFavorite,

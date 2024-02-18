@@ -42,23 +42,6 @@ class SearchImageViewModel extends StateNotifier<SearchImageState> {
     state = SearchImageState(imageInfoEntityList: _searchImageEntityList);
   }
 
-  Future<void> loadCurrentSearchImages() async {
-    if(_searchImageEntityList.isEmpty){
-      return;
-    }
-    final favoriteImageList = await _favoriteImageUseCase.getFavoriteImageList();
-    for (var searchImage in _searchImageEntityList) {
-      searchImage.isFavorite = false; // 초기화
-      for (var favoriteImage in favoriteImageList) {
-        if (favoriteImage.uniqueId == searchImage.uniqueId) {
-          searchImage.isFavorite = true;
-        }
-      }
-    }
-
-    state = SearchImageState(imageInfoEntityList: _searchImageEntityList);
-  }
-
   Future<void> loadMoreSearchImages() async {
     log('#### _page:$_page');
 
@@ -80,8 +63,24 @@ class SearchImageViewModel extends StateNotifier<SearchImageState> {
     state = SearchImageState(imageInfoEntityList: _searchImageEntityList);
   }
 
+  Future<void> loadCurrentSearchImages() async {
+    if(_searchImageEntityList.isEmpty){
+      return;
+    }
+    final favoriteImageList = await _favoriteImageUseCase.getFavoriteImageList();
+    for (var searchImage in _searchImageEntityList) {
+      searchImage.isFavorite = false; // 초기화
+      for (var favoriteImage in favoriteImageList) {
+        if (favoriteImage.uniqueId == searchImage.uniqueId) {
+          searchImage.isFavorite = true;
+        }
+      }
+    }
+
+    state = SearchImageState(imageInfoEntityList: _searchImageEntityList);
+  }
+
   Future<void> addFavoriteImage(ImageInfoEntity imageInfoEntity) async {
-    log('#### addFavoriteImage');
     await _favoriteImageUseCase.addFavoriteImage(imageInfoEntity);
     loadCurrentSearchImages();
   }
@@ -90,17 +89,6 @@ class SearchImageViewModel extends StateNotifier<SearchImageState> {
     await _favoriteImageUseCase.removeFavoriteImage(imageInfoEntity);
     loadCurrentSearchImages();
   }
-
-  Future<void> syncFavoriteImage(ImageInfoEntity imageInfoEntity) async {
-    for (var searchImage in _searchImageEntityList) {
-      if (searchImage.uniqueId == imageInfoEntity.uniqueId) {
-        searchImage.isFavorite = imageInfoEntity.isFavorite;
-      }
-    }
-    state = SearchImageState(imageInfoEntityList: _searchImageEntityList);
-  }
-
-
 
   void _reset() {
     _page = 1;
