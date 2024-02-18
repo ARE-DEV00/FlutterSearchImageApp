@@ -32,6 +32,7 @@ class DataBaseRepositoryImpl implements DataBaseRepository {
   @override
   Future<List<ImageInfoEntity>> getFavoriteImageList() async {
     final favoriteImages = await _dataBaseService.getFavoriteImageList();
+    favoriteImages.sort((a, b) => b.registerDate.compareTo(a.registerDate));
     return favoriteImages
         .map((favoriteImage) => ImageInfoEntity(
               uniqueId: CommonDataUtil.generateUniqueId(

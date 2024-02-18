@@ -15,6 +15,8 @@ class FavoriteImageCollection {
   String? displaySiteName;
   String? datetime;
   bool isFavorite = false;
+  DateTime registerDate = DateTime.now();
+  DateTime modifyDate = DateTime.now();
 
   FavoriteImageCollection({
     required this.uniqueId,
